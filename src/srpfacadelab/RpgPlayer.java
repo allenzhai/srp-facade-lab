@@ -1,21 +1,18 @@
 package srpfacadelab;
 
-import srpfacadelab.Inventory;
+import srpfacadelab.Facade;
 
 
 public class RpgPlayer {
-    //public static final int MAX_CARRYING_CAPACITY = 1000;
     private final IGameEngine gameEngine;
     private int health;
     private int maxHealth;
     private int armour;
-    public Inventory inventory;
-    public StatsCalculator statsCalculator;
+    public Facade facade;
 
     public RpgPlayer(IGameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        this.inventory = new Inventory(gameEngine, this);
-        this.statsCalculator = new StatsCalculator(this);
+        this.facade = new Facade(gameEngine, this)
     }
 
     public void takeDamage(int damage) {
@@ -25,7 +22,7 @@ public class RpgPlayer {
 
         int damageToDeal;
 
-        if (inventory.getCarryingCapacity() > (0.5 * inventory.MAX_CARRYING_CAPACITY)){
+        if (facade.getCarryingCapacity() > (0.5 * inventory.MAX_CARRYING_CAPACITY)){
             damageToDeal = (int)(0.75 * damage) - armour;
         }
         else{
@@ -63,20 +60,20 @@ public class RpgPlayer {
     }
 
     public int getCarryingCapacity() {
-        return inventory.getCarryingCapacity();
+        return facade.getCarryingCapacity();
     }
 
 
     // Stat Tracker
     public void calculateStats() {
-        setArmour(statsCalculator.calculateStats());
+        setArmour(facade.calculateStats());
     }
 
     // Inventory
     public void useItem(Item item) {
-        inventory.useItem(item);
+        facade.useItem(item);
     }
     public boolean pickUpItem(Item item) {
-        return inventory.pickUpItem(item);
+        return facade.pickUpItem(item);
     }
 }

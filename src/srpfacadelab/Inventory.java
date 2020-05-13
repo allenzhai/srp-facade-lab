@@ -15,7 +15,6 @@ public class Inventory {
         this.player = player;
         inventory = new ArrayList<Item>();
         carryingCapacity = MAX_CARRYING_CAPACITY;
-
     }
 
     public int getCarryingCapacity() {
@@ -31,7 +30,6 @@ public class Inventory {
         if (item.getName().equals("Stink Bomb"))
         {
             List<IEnemy> enemies = gameEngine.getEnemiesNear(player);
-//            System.out.println("Stoinks");
             for (IEnemy enemy: enemies){
                 enemy.takeDamage(100);
             }
